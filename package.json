@@ -1,0 +1,461 @@
+{
+  "name": "muse2api-kilocode",
+  "displayName": "muse.ai for Kilo Code (muse2api)",
+  "description": "Runs the muse2api gateway locally and registers the muse.ai models (chat / image / video) as an OpenAI-compatible provider in Kilo Code. / Startet das muse2api-Gateway lokal und registriert die muse.ai-Modelle als OpenAI-kompatiblen Provider in Kilo Code.",
+  "version": "0.1.0",
+  "publisher": "muse-ai-tools",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1f2430",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jahdaganj04ki-a11y/muse2api2kilocode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jahdaganj04ki-a11y/muse2api2kilocode/issues"
+  },
+  "keywords": [
+    "kilo code",
+    "kilocode",
+    "muse.ai",
+    "muse2api",
+    "openai compatible",
+    "llm",
+    "gateway"
+  ],
+  "categories": [
+    "AI",
+    "Machine Learning",
+    "Other"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "muse2api.setup",
+        "title": "%cmd.setup%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.start",
+        "title": "%cmd.start%",
+        "category": "muse.ai",
+        "icon": "$(play)"
+      },
+      {
+        "command": "muse2api.stop",
+        "title": "%cmd.stop%",
+        "category": "muse.ai",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "muse2api.restart",
+        "title": "%cmd.restart%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.status",
+        "title": "%cmd.status%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.register",
+        "title": "%cmd.register%",
+        "category": "muse.ai",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "muse2api.unregister",
+        "title": "%cmd.unregister%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.useModel",
+        "title": "%cmd.useModel%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.openDashboard",
+        "title": "%cmd.openDashboard%",
+        "category": "muse.ai",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "muse2api.importCookies",
+        "title": "%cmd.importCookies%",
+        "category": "muse.ai",
+        "icon": "$(key)"
+      },
+      {
+        "command": "muse2api.importCookiesFromFile",
+        "title": "%cmd.importCookiesFromFile%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.accounts",
+        "title": "%cmd.accounts%",
+        "category": "muse.ai",
+        "icon": "$(account)"
+      },
+      {
+        "command": "muse2api.testChat",
+        "title": "%cmd.testChat%",
+        "category": "muse.ai",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "muse2api.showLogs",
+        "title": "%cmd.showLogs%",
+        "category": "muse.ai",
+        "icon": "$(output)"
+      },
+      {
+        "command": "muse2api.openKiloConfig",
+        "title": "%cmd.openKiloConfig%",
+        "category": "muse.ai",
+        "icon": "$(json)"
+      },
+      {
+        "command": "muse2api.openDataDir",
+        "title": "%cmd.openDataDir%",
+        "category": "muse.ai"
+      },
+      {
+        "command": "muse2api.copyAccess",
+        "title": "%cmd.copyAccess%",
+        "category": "muse.ai",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "muse2api.help",
+        "title": "%cmd.help%",
+        "category": "muse.ai",
+        "icon": "$(question)"
+      },
+      {
+        "command": "muse2api.refresh",
+        "title": "%cmd.refresh%",
+        "category": "muse.ai",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "muse2api.setDriver",
+        "title": "%cmd.setDriver%",
+        "category": "muse.ai",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "muse2api.generateImage",
+        "title": "%cmd.generateImage%",
+        "category": "muse.ai",
+        "icon": "$(file-media)"
+      },
+      {
+        "command": "muse2api.generateVideo",
+        "title": "%cmd.generateVideo%",
+        "category": "muse.ai",
+        "icon": "$(device-camera-video)"
+      },
+      {
+        "command": "muse2api.statusMenu",
+        "title": "%cmd.statusMenu%",
+        "category": "muse.ai"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "muse2api",
+          "title": "%view.container%",
+          "icon": "media/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "muse2api": [
+        {
+          "id": "muse2api.gateway",
+          "name": "%view.gateway%",
+          "icon": "media/logo.svg",
+          "contextualTitle": "%view.container%"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "muse2api.refresh",
+          "when": "view == muse2api.gateway",
+          "group": "navigation@1"
+        },
+        {
+          "command": "muse2api.start",
+          "when": "view == muse2api.gateway",
+          "group": "navigation@2"
+        },
+        {
+          "command": "muse2api.stop",
+          "when": "view == muse2api.gateway",
+          "group": "navigation@3"
+        },
+        {
+          "command": "muse2api.openDashboard",
+          "when": "view == muse2api.gateway",
+          "group": "navigation@4"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "muse2api.register",
+          "when": "view == muse2api.gateway && viewItem =~ /^muse2api\\.(action|models)/",
+          "group": "inline"
+        },
+        {
+          "command": "muse2api.importCookies",
+          "when": "view == muse2api.gateway && viewItem == muse2api.accounts",
+          "group": "inline"
+        },
+        {
+          "command": "muse2api.testChat",
+          "when": "view == muse2api.gateway && viewItem == muse2api.action.test",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "muse2api.refresh",
+          "when": "false"
+        },
+        {
+          "command": "muse2api.statusMenu",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "muse.ai / muse2api",
+      "properties": {
+        "muse2api.driver": {
+          "type": "string",
+          "enum": [
+            "browser",
+            "mock",
+            "http"
+          ],
+          "default": "browser",
+          "markdownDescription": "%cfg.driver%"
+        },
+        "muse2api.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "%cfg.host%"
+        },
+        "muse2api.port": {
+          "type": "number",
+          "default": 18610,
+          "description": "%cfg.port%"
+        },
+        "muse2api.autoPort": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.autoPort%"
+        },
+        "muse2api.logLevel": {
+          "type": "string",
+          "enum": [
+            "DEBUG",
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ],
+          "default": "INFO",
+          "description": "%cfg.logLevel%"
+        },
+        "muse2api.pythonPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "%cfg.pythonPath%"
+        },
+        "muse2api.dataDir": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "%cfg.dataDir%"
+        },
+        "muse2api.apiKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "%cfg.apiKey%"
+        },
+        "muse2api.adminKey": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "%cfg.adminKey%"
+        },
+        "muse2api.autoStart": {
+          "type": "boolean",
+          "default": false,
+          "description": "%cfg.autoStart%"
+        },
+        "muse2api.chromiumPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "%cfg.chromiumPath%"
+        },
+        "muse2api.headless": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.headless%"
+        },
+        "muse2api.accountConcurrency": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 16,
+          "description": "%cfg.accountConcurrency%"
+        },
+        "muse2api.poolStrategy": {
+          "type": "string",
+          "enum": [
+            "affinity",
+            "lru",
+            "round_robin"
+          ],
+          "default": "affinity",
+          "description": "%cfg.poolStrategy%"
+        },
+        "muse2api.streamHeartbeat": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "%cfg.streamHeartbeat%"
+        },
+        "muse2api.env": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "%cfg.env%"
+        },
+        "muse2api.shim.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%cfg.shimEnabled%"
+        },
+        "muse2api.shim.port": {
+          "type": "number",
+          "default": 18611,
+          "description": "%cfg.shimPort%"
+        },
+        "muse2api.shim.autoPort": {
+          "type": "boolean",
+          "default": true,
+          "description": "%cfg.autoPort%"
+        },
+        "muse2api.shim.maxToolResultChars": {
+          "type": "number",
+          "default": 8000,
+          "minimum": 500,
+          "description": "%cfg.maxToolResultChars%"
+        },
+        "muse2api.shim.timeoutSeconds": {
+          "type": "number",
+          "default": 600,
+          "minimum": 30,
+          "description": "%cfg.shimTimeout%"
+        },
+        "muse2api.kilocode.providerId": {
+          "type": "string",
+          "default": "muse2api",
+          "markdownDescription": "%cfg.providerId%"
+        },
+        "muse2api.kilocode.displayName": {
+          "type": "string",
+          "default": "muse.ai (muse2api)",
+          "description": "%cfg.displayName%"
+        },
+        "muse2api.kilocode.scope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "workspace"
+          ],
+          "default": "global",
+          "markdownDescription": "%cfg.scope%"
+        },
+        "muse2api.kilocode.contextWindow": {
+          "type": "number",
+          "default": 128000,
+          "minimum": 4096,
+          "description": "%cfg.contextWindow%"
+        },
+        "muse2api.kilocode.maxOutputTokens": {
+          "type": "number",
+          "default": 8192,
+          "minimum": 512,
+          "description": "%cfg.maxOutputTokens%"
+        },
+        "muse2api.kilocode.declareToolCalls": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%cfg.declareToolCalls%"
+        },
+        "muse2api.kilocode.declareImages": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%cfg.declareImages%"
+        },
+        "muse2api.kilocode.includeAliases": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "%cfg.includeAliases%"
+        },
+        "muse2api.kilocode.setAsActiveModel": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "%cfg.setAsActiveModel%"
+        },
+        "muse2api.kilocode.writeKeyToAuthStore": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%cfg.writeKeyToAuthStore%"
+        },
+        "muse2api.useUv": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "%cfg.useUv%"
+        },
+        "muse2api.kilocode.includeNonChatModels": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "%cfg.includeNonChatModels%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node scripts/run-tests.mjs && npm run smoke",
+    "package": "node scripts/package.mjs",
+    "vscode:prepublish": "npm run compile -- --production",
+    "smoke": "npm run compile -- --production && node scripts/smoke.cjs"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "1.85.0",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  }
+}

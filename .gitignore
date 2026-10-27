@@ -1,0 +1,13 @@
+node_modules/
+dist/
+out/
+out-test/
+*.vsix
+!muse2api-kilocode-*.vsix
+*.log
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+data/
+.env
